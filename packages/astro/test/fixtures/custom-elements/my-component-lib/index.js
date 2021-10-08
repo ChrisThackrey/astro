@@ -1,4 +1,3 @@
-
 export default {
   name: '@astrojs/test-custom-element-renderer',
   server: './server',

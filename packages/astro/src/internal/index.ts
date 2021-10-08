@@ -106,6 +106,8 @@ async function generateHydrateScript(scriptOptions: HydrateScriptOptions, metada
   const { renderer, astroId, props } = scriptOptions;
   const { hydrate, componentUrl, componentExport } = metadata;
 
+  console.log("META", metadata)
+
   if (!componentExport) {
     throw new Error(`Unable to resolve a componentExport for "${metadata.displayName}"! Please open an issue.`);
   }

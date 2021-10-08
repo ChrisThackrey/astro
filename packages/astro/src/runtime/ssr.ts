@@ -118,12 +118,15 @@ async function resolveImportedModules(viteServer: ViteDevServer, file: URL) {
 /** use Vite to SSR */
 export async function ssr({ astroConfig, filePath, logging, mode, origin, pathname, route, routeCache, viteServer }: SSROptions): Promise<string> {
   try {
-    // 1. load module
-    const mod = (await viteServer.ssrLoadModule(fileURLToPath(filePath))) as ComponentInstance;
-
-    // 1.5. resolve renderers and imported modules.
+    // 1. resolve renderers and imported modules.
     // important that this happens _after_ ssrLoadModule, otherwise `importedModules` would be empty
-    const [renderers, importedModules] = await Promise.all([resolveRenderers(viteServer, astroConfig.renderers), resolveImportedModules(viteServer, filePath)]);
+    const [renderers, importedModules] = await Promise.all([resolveRenderers(viteServer,
+      astroConfig.renderers),
+      resolveImportedModules(viteServer, filePath)]
+    );
+
+    // 1.5. load module
+    const mod = (await viteServer.ssrLoadModule(fileURLToPath(filePath))) as ComponentInstance;
 
     // 2. handle dynamic routes
     let params: Params = {};

@@ -1,5 +1,3 @@
-/**
- * UNCOMMENT: add support for custom elements
 import { expect } from 'chai';
 import cheerio from 'cheerio';
 import { loadFixture } from './test-utils.js';
@@ -89,6 +87,3 @@ describe('Custom Elements', () => {
     expect($('client-only-element')).to.have.lengthOf(1);
   });
 });
-*/
-
-it.skip('is skipped', () => {});
